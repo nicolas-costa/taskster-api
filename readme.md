@@ -1,24 +1,59 @@
-# Lumen PHP Framework
+# Taskster API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+## About
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+This is the API for the app ( [Taskster](https://github.com/nicolas-costa/taskster-app)), totally rebuilt using Lumen, the old one has been built using Express and hosted on heroku.   
+As a matter of simplicity, this API uses an sqlite database.
 
-## Official Documentation
+## Requirements
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+[Lumen requirements](https://lumen.laravel.com/docs/6.x#server-requirements)
 
-## Contributing
+## Instalation
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Clone the project
 
-## Security Vulnerabilities
+```
+git clone https://github.com/nicolas-costa/taskster-api.git
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Go to the project's folder
+
+```
+cd taskster-api
+```
+Install it's dependencies
+
+```
+composer update
+```
+
+Set up the 'APP_KEY' vraiable on the env file.   
+You can generate one on the internet but I'll leave one site here
+* [passwordgenerator.net](https://passwordsgenerator.net/)
+
+Run migrations
+
+```
+php artisan migrate
+```
+
+Run seeders
+
+```
+php artisan db:seed
+```
+
+Serve
+
+```
+php -S localhost:8000 -t public
+```
+
+
+## Author
+Nícolas Costa
 
 ## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+WTFPL
