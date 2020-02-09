@@ -12,12 +12,26 @@ class AuthTest extends TestCase
         $response = $this->json('post', '/api/v1/login',
             [
                 'login' => $user->login,
-                'password' => $user->password
+                'password' => 123456
             ]);
 
-        $response->seeJson(['success' => true]);
         $response->assertResponseStatus(200);
-        $response->seeJsonContains('token', false);
+        $response->seeJsonStructure(['success',
+            'token']);
     }
 
+    public function test_if_it_doesnt_log_in_with_invalid_credentials() {
+
+        $response = $this->json('post', '/api/v1/login',
+            [
+                'login' => 'foo',
+                'password' => 'bar'
+            ]);
+
+        $response->assertResponseStatus(401);
+        $response->seeJsonEquals([
+            'success' => false,
+            'status' => 'Unauthorized'
+        ]);
+    }
 }
