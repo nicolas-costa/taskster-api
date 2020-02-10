@@ -16,4 +16,6 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
 
     $router->post('login', 'AuthController@login');
 
+    $router->get('/tasks/{offset}', 'TaskController@index');
+
 });

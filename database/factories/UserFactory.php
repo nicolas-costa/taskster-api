@@ -13,7 +13,9 @@
 
 use Illuminate\Support\Facades\Hash;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+use App\User;
+
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'login' => $faker->firstName,
         'password' => Hash::make(123456),
