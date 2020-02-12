@@ -25,7 +25,7 @@ class ListsTest extends TestCase
     /* @test **/
     public function test_if_it_lists_the_users_tasks() {
 
-        $task = factory(Task::class)->create([
+        $task = factory(Task::class, 2)->create([
             'user_id' => $this->user->id
         ]);
 
@@ -35,9 +35,7 @@ class ListsTest extends TestCase
         $response->assertResponseStatus(200);
         $response->seeJsonEquals([
             'success' => true,
-            'status' => [
-                $task
-            ]
+            'status' => $task
         ]);
     }
 }

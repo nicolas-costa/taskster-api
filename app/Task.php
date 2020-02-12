@@ -26,8 +26,4 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getByOffset($offset, $id) {
-        return self::where('user_id', $id)
-            ->limit($offset)->take(15)->get();
-    }
 }

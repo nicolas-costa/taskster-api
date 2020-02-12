@@ -55,4 +55,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * Return a collection of tasks for a given user starting by an offset with an optional amount
+     *
+     * @param $offset
+     * @param int $amount
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    public function tasksByOffset($offset, $amount = 15) {
+
+        return $this->tasks()->limit($offset)->take($amount)->get();
+    }
+
 }

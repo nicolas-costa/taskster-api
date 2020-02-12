@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Task;
-
 class TaskController
 {
 
@@ -14,7 +12,7 @@ class TaskController
 
         $me = Auth::user();
 
-        $tasks = Task::getByOffset($request->offset, $me->id);
+        $tasks = $me->tasksByOffset($request->offset);
 
         return response()->json(['success' => true,
                             'status' => $tasks]);
