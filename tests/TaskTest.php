@@ -7,7 +7,7 @@ use App\User;
 use App\Task;
 
 
-class ListsTest extends TestCase
+class TaskTest extends TestCase
 {
     private $token = null;
     private $user = null;
@@ -25,7 +25,7 @@ class ListsTest extends TestCase
     /* @test **/
     public function test_if_it_lists_the_users_tasks() {
 
-        $task = factory(Task::class, 2)->create([
+        $tasks = factory(Task::class, 2)->create([
             'user_id' => $this->user->id
         ]);
 
@@ -35,7 +35,27 @@ class ListsTest extends TestCase
         $response->assertResponseStatus(200);
         $response->seeJsonEquals([
             'success' => true,
+            'status' => $tasks
+        ]);
+    }
+
+    /* @test **/
+    public function test_if_it_shows_a_task_from_current_user() {
+
+        $task = factory(Task::class)->create([
+            'user_id' => $this->user->id
+        ]);
+
+        $response = $this->json('get', '/api/v1/task/'.$task->id,
+            [], $this->token);
+        $response->assertResponseStatus(200);
+        $response->seeJsonEquals([
+            'success' => true,
             'status' => $task
         ]);
+
+        $jsonContent = json_decode($response->response->getContent());
+
+        $this->assertEquals($jsonContent->status->user_id, $this->user->id);
     }
 }
