@@ -37,6 +37,13 @@ class TaskTest extends TestCase
             'success' => true,
             'status' => $tasks
         ]);
+
+        $jsonContent = json_decode($response->response->getContent());
+
+        foreach($jsonContent->status as $task) {
+            $this->assertEquals($task->user_id, $this->user->id);
+        }
+
     }
 
     /* @test **/
