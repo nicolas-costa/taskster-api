@@ -65,4 +65,35 @@ class TaskTest extends TestCase
 
         $this->assertEquals($jsonContent->status->user_id, $this->user->id);
     }
+
+    /* @test **/
+    public function test_if_it_deletes_a_task_from_current_user() {
+
+        $task = factory(Task::class)->create([
+            'user_id' => $this->user->id
+        ]);
+
+        $response = $this->json('delete', '/api/v1/task/delete/'.$task->id,
+            [], $this->token);
+        $response->assertResponseStatus(204);
+
+        $this->notSeeInDatabase('tasks', [
+            'id' => $task->id,
+            'deleted_at' => null]);
+    }
+
+    /* @test **/
+    public function test_if_it_sends_404_when_the_task_is_not_found() {
+
+        $response = $this->json('delete', '/api/v1/task/delete/'.-1,
+            [], $this->token);
+        $response->assertResponseStatus(404);
+
+        $response->seeJsonEquals([
+            'success' => false,
+            'status' => 'Not found'
+        ]);
+
+    }
+
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Task;
 
 class TaskController
 {
@@ -28,4 +27,16 @@ class TaskController
             'status' => $task], 200);
     }
 
+    public function destroy(Request $request) {
+
+        if($task = Auth::user()->tasks->find($request->task)) {
+
+            $task->delete();
+
+            return response()->json([], 204);
+        }
+        return response()->json(['success' => false,
+            'status' => 'Not found'], 404);
+
+    }
 }
