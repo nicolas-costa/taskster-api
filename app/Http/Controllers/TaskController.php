@@ -21,10 +21,14 @@ class TaskController
 
     public function show(Request $request) {
 
-        $task = Auth::user()->tasks->find($request->task);
+        if($task = Auth::user()->tasks->find($request->task)) {
+            return response()->json(['success' => true,
+                'status' => $task], 200);
+        }
 
-        return response()->json(['success' => true,
-            'status' => $task], 200);
+        return response()->json(['success' => false,
+            'status' => 'Not found'], 404);
+
     }
 
     public function destroy(Request $request) {

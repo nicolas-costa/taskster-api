@@ -65,6 +65,19 @@ class TaskTest extends TestCase
 
         $this->assertEquals($jsonContent->status->user_id, $this->user->id);
     }
+    /* @test **/
+    public function test_if_it_sends_404_when_the_task_to_be_shown_is_not_found() {
+
+        $response = $this->json('get', '/api/v1/task/'.-1,
+            [], $this->token);
+        $response->assertResponseStatus(404);
+
+        $response->seeJsonEquals([
+            'success' => false,
+            'status' => 'Not found'
+        ]);
+
+    }
 
     /* @test **/
     public function test_if_it_deletes_a_task_from_current_user() {
@@ -83,7 +96,7 @@ class TaskTest extends TestCase
     }
 
     /* @test **/
-    public function test_if_it_sends_404_when_the_task_is_not_found() {
+    public function test_if_it_sends_404_when_the_task_to_be_deleted_is_not_found() {
 
         $response = $this->json('delete', '/api/v1/task/delete/'.-1,
             [], $this->token);
