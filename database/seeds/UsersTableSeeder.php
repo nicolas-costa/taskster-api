@@ -1,8 +1,10 @@
 <?php
 
-use App\User;
-
 use Illuminate\Database\Seeder;
+
+use App\User;
+use App\Task;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,6 +15,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 5)->create()->each(function($user) {
+
+            $user->tasks()->saveMany(factory(Task::class, 7)->create());
+        });
     }
 }

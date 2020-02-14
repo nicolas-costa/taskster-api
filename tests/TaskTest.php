@@ -76,7 +76,6 @@ class TaskTest extends TestCase
             'success' => false,
             'status' => 'Not found'
         ]);
-
     }
 
     /* @test **/
@@ -106,6 +105,26 @@ class TaskTest extends TestCase
             'success' => false,
             'status' => 'Not found'
         ]);
+    }
+
+    /* @test **/
+    public function test_if_it_creates_a_new_task() {
+
+        $task = factory(Task::class)->make();
+
+        $response = $this->json('post', 'api/v1/task/create',
+            $task->toArray(), $this->token);
+
+        $response->assertResponseStatus(201);
+
+        $this->seeInDatabase('tasks', $task->toArray());
+
+        $jsonContent = $response->response->getContent();
+
+        $this->assertJson($jsonContent);
+
+        // the code bellow doesn't work due to a bug on laravel Issue number #11068
+        //$response->seeJsonContains($jsonContent['status']);
 
     }
 

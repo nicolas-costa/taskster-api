@@ -14,10 +14,8 @@ class Task extends Model
       'title',
       'content',
       'color',
-      'done',
       'schedule',
       'user_id',
-
     ];
 
     protected $casts = [

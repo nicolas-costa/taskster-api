@@ -19,5 +19,6 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
     $router->get('/tasks/{offset}', 'TaskController@index');
     $router->get('/task/{task}', 'TaskController@show');
     $router->delete('/task/delete/{task}', 'TaskController@destroy');
+    $router->post('/task/create', 'TaskController@create');
 
 });
