@@ -20,5 +20,6 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
     $router->get('/task/{task}', 'TaskController@show');
     $router->delete('/task/delete/{task}', 'TaskController@destroy');
     $router->post('/task/create', 'TaskController@create');
+    $router->put('/task/update/{taskId}', 'TaskController@update');
 
 });

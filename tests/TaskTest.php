@@ -128,4 +128,22 @@ class TaskTest extends TestCase
 
     }
 
+    /* @test **/
+    public function test_if_it_updates_a_task() {
+
+        $task = factory(Task::class)->create([
+            'user_id' => $this->user->id
+        ]);
+
+        $task->title = 'foo';
+        $task->content = 'bar';
+
+        $response = $this->json('put', 'api/v1/task/update/'.$task->id,
+            $task->toArray(), $this->token);
+
+        $response->assertResponseStatus(204);
+
+        $this->seeInDatabase('tasks', $task->toArray());
+    }
+
 }
