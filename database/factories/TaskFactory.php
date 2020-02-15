@@ -9,7 +9,7 @@ $factory->define(Task::class, function(Faker\Generator $faker) {
        'title' => $faker->firstName,
        'content' => $faker->text(120),
        'color' => $faker->safeColorName,
-       'done' => rand(0,1),
+       'done' => 0,
        'schedule' => $faker->dateTime()->format('Y-m-d h:i:s'),
        'user_id' => function() {
             return factory(User::class)->create()->id;
