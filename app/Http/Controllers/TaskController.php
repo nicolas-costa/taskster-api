@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Task;
 
-class TaskController
+class TaskController extends Controller
 {
 
     public function index(Request $request) {
@@ -22,7 +22,7 @@ class TaskController
 
     public function create(Request $request) {
 
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string',
             'content' => 'required|string',
             'user_id' => 'required|integer'

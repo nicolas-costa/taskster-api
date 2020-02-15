@@ -128,4 +128,13 @@ class TaskTest extends TestCase
 
     }
 
+    public function test_if_it_sends_with_422_when_post_data_is_incomplete() {
+
+        $response = $this->json('post', 'api/v1/task/create',
+            [], $this->token);
+
+        $response->assertResponseStatus(422);
+
+    }
+
 }
