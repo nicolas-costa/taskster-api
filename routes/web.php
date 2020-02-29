@@ -16,10 +16,14 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
 
     $router->post('login', 'AuthController@login');
 
-    $router->get('/tasks/{offset}', 'TaskController@index');
-    $router->get('/task/{task}', 'TaskController@show');
-    $router->delete('/task/delete/{task}', 'TaskController@destroy');
-    $router->post('/task/create', 'TaskController@create');
-    $router->put('/task/update/{taskId}', 'TaskController@update');
+    $router->group(['middleware' => 'jwt.auth'], function($router) {
+
+        $router->get('/tasks/{offset}', 'TaskController@index');
+        $router->get('/task/{task}', 'TaskController@show');
+        $router->delete('/task/delete/{task}', 'TaskController@destroy');
+        $router->post('/task/create', 'TaskController@create');
+        $router->put('/task/update/{taskId}', 'TaskController@update');
+
+    });
 
 });
