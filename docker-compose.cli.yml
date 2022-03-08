@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  artisan:
+    image: php_api:latest
+    entrypoint: php artisan
+    init: true
+    volumes:
+      - .:/application
+    networks:
+      - app-network
+
+  composer:
+    image: php_api:latest
+    entrypoint: composer
+    init: true
+    volumes:
+      - .:/application
+    networks:
+      - app-network
+
+  test:
+    image: php_api:latest
+    entrypoint: php vendor/bin/phpunit
+    init: true
+    volumes:
+      - .:/application
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
