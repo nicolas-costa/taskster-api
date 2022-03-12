@@ -35,6 +35,8 @@ services:
     environment:
       MYSQL_DATABASE: taskster
       MYSQL_ROOT_PASSWORD: password
+    networks:
+        - app-network
 
 networks:
   app-network:
