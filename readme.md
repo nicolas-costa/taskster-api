@@ -19,8 +19,8 @@ docker-compose up -d
 
 Install it's dependencies
 
-```
-composer update
+```bash
+docker-compose -f docker-compose.cli.yml run --rm composer update
 ```
 
 Set up the 'APP_KEY' vraiable on the env file.   
@@ -36,10 +36,10 @@ docker-compose -f docker-compose.cli.yml run --rm artisan migrate
 Run seeders
 
 ```bash
-docker-compose -f docker-compose.cli.yml run --rm artisan migrate db:seed
+docker-compose -f docker-compose.cli.yml run --rm artisan db:seed
 ```
 
-If everything went well, the service will be runing on [localhost](http://localhost:8000)
+If everything went well, the service will be running on [localhost](http://localhost:8000)
 
 ## Author
 Nícolas Costa
