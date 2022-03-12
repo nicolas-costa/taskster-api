@@ -41,6 +41,15 @@ docker-compose -f docker-compose.cli.yml run --rm artisan db:seed
 
 If everything went well, the service will be running on [localhost](http://localhost:8000)
 
+You should be able to login by using:
+
+```json
+{
+    "login": "admin",
+    "password": "password"
+}
+```
+
 ## Author
 Nícolas Costa
 
