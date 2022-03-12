@@ -9,7 +9,7 @@ totally rebuilt using Lumen, the old one has been built using Express and hosted
 
 - Docker and docker-compose
 
-## Instalation
+## Installation
 
 The project utilizes [docker](https://docs.docker.com/get-docker/)
 
@@ -53,5 +53,5 @@ You should be able to login by using:
 ## Author
 Nícolas Costa
 
-##  License
+## License
 MIT
