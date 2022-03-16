@@ -23,7 +23,7 @@ Install it's dependencies
 docker-compose -f docker-compose.cli.yml run --rm composer update
 ```
 
-Set up the 'APP_KEY' vraiable on the env file.   
+Set up the 'APP_KEY' variable on the env file.   
 You can generate one on the internet but I'll leave one site here
 * [passwordgenerator.net](https://passwordsgenerator.net/)
 
@@ -37,6 +37,12 @@ Run seeders
 
 ```bash
 docker-compose -f docker-compose.cli.yml run --rm artisan db:seed
+```
+
+Generate JWT key
+
+```bash
+docker-compose -f docker-compose.cli.yml run --rm artisan jwt:auth
 ```
 
 If everything went well, the service will be running on [localhost](http://localhost:8000)

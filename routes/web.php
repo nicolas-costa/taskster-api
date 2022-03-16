@@ -11,13 +11,16 @@
 |
 */
 
-
 $router->group(['prefix' => 'api/v1'], function() use($router) {
-
     $router->post('login', 'AuthController@login');
 
-    $router->get('/tasks/{offset}', 'TaskController@index');
-    $router->get('/task/{task}', 'TaskController@show');
-    $router->delete('/task/delete/{task}', 'TaskController@destroy');
+    $router->group(['middleware' => 'auth:api'], function ($router) {
 
+        $router->get('/tasks/', 'TaskController@index');
+
+        $router->get('/tasks/{task}', 'TaskController@show');
+
+        $router->delete('/tasks/{task}', 'TaskController@destroy');
+
+    });
 });

@@ -1,6 +1,8 @@
 <?php
 
 
+use App\User;
+
 return [
     'defaults' => [
         'guard' => 'api',
@@ -17,7 +19,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \App\User::class
+            'model' => User::class
         ]
     ]
 ];
