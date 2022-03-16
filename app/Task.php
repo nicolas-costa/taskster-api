@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-
     use SoftDeletes;
 
     protected $fillable = [
@@ -17,16 +16,17 @@ class Task extends Model
       'done',
       'schedule',
       'user_id',
-
     ];
 
     protected $casts = [
         'done' => 'boolean',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
     ];
 
     public function user() {
         return $this->belongsTo(User::class);
     }
-
 }
