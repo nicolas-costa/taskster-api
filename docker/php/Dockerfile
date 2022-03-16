@@ -33,9 +33,11 @@ COPY docker/php/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /application
 
-COPY ./composer.json .
+COPY . .
 
 RUN composer install --prefer-dist --no-progress --optimize-autoloader
+
+RUN chown -R www-data:www-data /application
 
 EXPOSE 9000
 CMD ["php-fpm"]
